@@ -62,6 +62,35 @@
             font-size: 18px;
         }
         
+        /* Official Link Button */
+        .official-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+        
+        .official-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(255,107,107,0.3);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .official-btn:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,107,107,0.4);
+        }
+        
         /* Login Section */
         .login-section {
             background: white;
@@ -260,6 +289,15 @@
             font-size: 14px;
         }
         
+        /* Warning Message */
+        .warning-message {
+            background: rgba(255,193,7,0.1);
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
         /* Responsive */
         @media (max-width: 768px) {
             .header {
@@ -276,10 +314,34 @@
             .features {
                 grid-template-columns: 1fr;
             }
+            
+            .official-link {
+                position: relative;
+                top: 0;
+                left: 0;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+            
+            .language-switcher {
+                position: relative;
+                top: 0;
+                right: 0;
+                text-align: center;
+                margin-top: 20px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Нақты KazNU жүйесіне сілтеме -->
+    <div class="official-link">
+        <button class="official-btn" onclick="goToOfficialSite()">
+            🔗 Нақты KazNU жүйесі
+        </button>
+    </div>
+    
+    <!-- Тілдерді ауыстыру -->
     <div class="language-switcher">
         <button class="lang-btn" onclick="changeLanguage('kk')">Қазақша</button>
         <button class="lang-btn" onclick="changeLanguage('ru')">Русский</button>
@@ -287,6 +349,11 @@
     </div>
     
     <div class="container">
+        <!-- Ескерту хабарламасы -->
+        <div class="warning-message">
+            <strong>Ескерту:</strong> Бұл демонстрациялық сайт. Нақты жүйеге өту үшін жоғарыдағы "Нақты KazNU жүйесі" батырмасын басыңыз.
+        </div>
+        
         <header class="header">
             <div class="logo">
                 <div class="logo-img">🎓</div>
@@ -405,9 +472,21 @@
     <div class="footer">
         <p>© 2024 Әл-Фараби атындағы Қазақ Ұлттық Университеті</p>
         <p>Техникалық қолдау: +7 727 377 3333 | portal@kaznu.kz</p>
+        <p style="margin-top: 10px; font-size: 12px;">
+            Бұл демонстрациялық сайт. Нақты жүйе: 
+            <a href="https://univer.kaznu.kz/user/login?ReturnUrl=%2f" style="color: #ffc107;">https://univer.kaznu.kz</a>
+        </p>
     </div>
 
     <script>
+        // Нақты KazNU жүйесіне өту функциясы
+        function goToOfficialSite() {
+            const confirmed = confirm("Нақты KazNU жүйесіне өткіңіз келе ме? Бұл демонстрациялық сайттан шығады.");
+            if (confirmed) {
+                window.open("https://univer.kaznu.kz/user/login?ReturnUrl=%2f", "_blank");
+            }
+        }
+        
         let currentLanguage = 'kk';
         
         function changeLanguage(lang) {
@@ -423,7 +502,9 @@
                     loginButton: 'Кіру',
                     forgotPassword: 'Парольді ұмыттым',
                     register: 'Тіркелу',
-                    guestMode: 'Қонақ ретінде кіру'
+                    guestMode: 'Қонақ ретінде кіру',
+                    warning: 'Ескерту: Бұл демонстрациялық сайт. Нақты жүйеге өту үшін жоғарыдағы "Нақты KazNU жүйесі" батырмасын басыңыз.',
+                    officialBtn: '🔗 Нақты KazNU жүйесі'
                 },
                 'ru': {
                     title: 'Портал Университета KazNU',
@@ -435,7 +516,9 @@
                     loginButton: 'Войти',
                     forgotPassword: 'Забыли пароль?',
                     register: 'Регистрация',
-                    guestMode: 'Войти как гость'
+                    guestMode: 'Войти как гость',
+                    warning: 'Внимание: Это демонстрационный сайт. Для перехода в реальную систему нажмите кнопку "Реальная система KazNU" выше.',
+                    officialBtn: '🔗 Реальная система KazNU'
                 },
                 'en': {
                     title: 'KazNU University Portal',
@@ -447,7 +530,9 @@
                     loginButton: 'Login',
                     forgotPassword: 'Forgot Password?',
                     register: 'Register',
-                    guestMode: 'Guest Mode'
+                    guestMode: 'Guest Mode',
+                    warning: 'Note: This is a demonstration site. To go to the real system, click the "Real KazNU System" button above.',
+                    officialBtn: '🔗 Real KazNU System'
                 }
             };
             
@@ -459,6 +544,9 @@
             document.querySelector('label[for="password"]').textContent = t.passwordLabel;
             document.querySelector('label[for="userType"]').textContent = t.userTypeLabel;
             document.querySelector('.btn-login').textContent = t.loginButton;
+            document.querySelector('.warning-message strong').textContent = t.warning.split(':')[0] + ':';
+            document.querySelector('.warning-message').lastChild.textContent = ' ' + t.warning.split(': ')[1];
+            document.querySelector('.official-btn').innerHTML = t.officialBtn;
             
             const links = document.querySelectorAll('.login-links a');
             links[0].textContent = t.forgotPassword;
