@@ -1,62 +1,528 @@
 <!DOCTYPE html>
-<html>
+<html lang="kk">
 <head>
     <meta charset="UTF-8">
-    <title>Менің сайтым</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KazNU University Portal</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #003366 0%, #00509E 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
-        header {
-            background-color: #f0f0f0;
-            padding: 20px;
+        
+        /* Header Styles */
+        .header {
+            background: white;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            padding: 15px 30px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-img {
+            height: 50px;
+        }
+        
+        .logo-text h1 {
+            color: #003366;
+            font-size: 24px;
+        }
+        
+        .logo-text p {
+            color: #00509E;
+            font-size: 14px;
+        }
+        
+        .university-name {
+            color: #003366;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        /* Login Section */
+        .login-section {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.15);
+            padding: 40px;
+            max-width: 450px;
+            margin: 50px auto;
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .login-header h2 {
+            color: #003366;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .login-header p {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #003366;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #00509E;
+            box-shadow: 0 0 0 3px rgba(0,80,158,0.1);
+        }
+        
+        .btn-login {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #00509E 0%, #003366 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,80,158,0.3);
+        }
+        
+        /* Links */
+        .login-links {
+            margin-top: 20px;
             text-align: center;
         }
-        nav a {
-            margin: 0 15px;
+        
+        .login-links a {
+            color: #00509E;
             text-decoration: none;
-            color: #333;
+            font-size: 14px;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        
+        .login-links a:hover {
+            color: #003366;
+            text-decoration: underline;
+        }
+        
+        /* Features Section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            color: #00509E;
+            margin-bottom: 15px;
+        }
+        
+        .feature-card h3 {
+            color: #003366;
+            margin-bottom: 10px;
+        }
+        
+        /* Dashboard Preview */
+        .dashboard-preview {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 40px;
+            display: none;
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            background: #00509E;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .dashboard-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #00509E;
+        }
+        
+        /* Language Switcher */
+        .language-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        
+        .lang-btn {
+            background: rgba(255,255,255,0.9);
+            border: 1px solid #ddd;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: white;
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .login-section {
+                margin: 20px;
+                padding: 25px;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Менің сайтыма қош келдіңіз!</h1>
-        <nav>
-            <a href="#about">Біз туралы</a>
-            <a href="#services">Қызметтер</a>
-            <a href="#contact">Байланыс</a>
-        </nav>
-    </header>
+    <div class="language-switcher">
+        <button class="lang-btn" onclick="changeLanguage('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="changeLanguage('ru')">Русский</button>
+        <button class="lang-btn" onclick="changeLanguage('en')">English</button>
+    </div>
     
-    <main>
-        <section id="about">
-            <h2>Біз туралы</h2>
-            <p>Бұл менің тұңғыш веб-сайтым.</p>
-        </section>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <div class="logo-img">🎓</div>
+                <div class="logo-text">
+                    <h1>KazNU Университет порталы</h1>
+                    <p>Әл-Фараби атындағы Қазақ Ұлттық Университеті</p>
+                </div>
+            </div>
+            <div class="university-name">
+                Студенттер мен оқытушылар үшін бірыңғай платформа
+            </div>
+        </header>
         
-        <section id="services">
-            <h2>Қызметтер</h2>
-            <ul>
-                <li>Веб-дизайн</li>
-                <li>Мәтін редакциясы</li>
-                <li>Консультация</li>
-            </ul>
-        </section>
+        <div class="login-section" id="loginSection">
+            <div class="login-header">
+                <h2>Жүйеге кіру</h2>
+                <p>Кіру үшін логиніңізді және пароліңізді енгізіңіз</p>
+            </div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Логин / Студент нөмірі</label>
+                    <input type="text" id="username" class="form-control" placeholder="Мысалы: 123456" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <input type="password" id="password" class="form-control" placeholder="Пароліңізді енгізіңіз" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="userType">Пайдаланушы түрі</label>
+                    <select id="userType" class="form-control">
+                        <option value="student">Студент</option>
+                        <option value="teacher">Оқытушы</option>
+                        <option value="admin">Әкімші</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn-login">Кіру</button>
+                
+                <div class="login-links">
+                    <a href="#" onclick="showForgotPassword()">Парольді ұмыттым</a>
+                    <a href="#" onclick="showRegister()">Тіркелу</a>
+                    <a href="#" onclick="showGuestMode()">Қонақ ретінде кіру</a>
+                </div>
+            </form>
+        </div>
         
-        <section id="contact">
-            <h2>Байланыс</h2>
-            <p>Email: example@email.com</p>
-            <p>Телефон: +7 777 123 4567</p>
-        </section>
-    </main>
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">📚</div>
+                <h3>Оқу материалдары</h3>
+                <p>Лекциялар, оқулықтар және әдістемелік материалдар</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Бақылау жүйесі</h3>
+                <p>Бағалар, рейтингтер және статистика</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🗓️</div>
+                <h3>Кестелер</h3>
+                <p>Сабақ кестесі, емтихандар, іс-шаралар</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>Бірыңғай хабарлама</h3>
+                <p>Оқытушылар мен студенттердің қауіпсіз байланысы</p>
+            </div>
+        </div>
+        
+        <div class="dashboard-preview" id="dashboardPreview">
+            <div class="dashboard-header">
+                <h2>Жеке кабинет</h2>
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">НҰ</div>
+                    <div>
+                        <h3 id="userName">Нұрлыбек Үрметов</h3>
+                        <p id="userRole">3-курс студенті</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-item">
+                    <h4>🎓 Мамандық</h4>
+                    <p>Компьютерлік ғылымдар</p>
+                </div>
+                
+                <div class="dashboard-item">
+                    <h4>⭐ Орташа балл</h4>
+                    <p>3.75 / 4.0</p>
+                </div>
+                
+                <div class="dashboard-item">
+                    <h4>📅 Келесі сабақ</h4>
+                    <p>Веб-бағдарламалау - 10:00</p>
+                </div>
+                
+                <div class="dashboard-item">
+                    <h4>📋 Тапсырмалар</h4>
+                    <p>3 жаңа тапсырма</p>
+                </div>
+            </div>
+            
+            <div class="login-links" style="margin-top: 30px;">
+                <button class="btn-login" onclick="logout()">Шығу</button>
+            </div>
+        </div>
+    </div>
     
-    <footer>
-        <p>&copy; 2024 Менің сайтым. Барлық құқықтар қорғалған.</p>
-    </footer>
-</body>
+    <div class="footer">
+        <p>© 2024 Әл-Фараби атындағы Қазақ Ұлттық Университеті</p>
+        <p>Техникалық қолдау: +7 727 377 3333 | portal@kaznu.kz</p>
+    </div>
 
+    <script>
+        let currentLanguage = 'kk';
+        
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            const translations = {
+                'kk': {
+                    title: 'KazNU Университет порталы',
+                    loginTitle: 'Жүйеге кіру',
+                    loginSubtitle: 'Кіру үшін логиніңізді және пароліңізді енгізіңіз',
+                    usernameLabel: 'Логин / Студент нөмірі',
+                    passwordLabel: 'Пароль',
+                    userTypeLabel: 'Пайдаланушы түрі',
+                    loginButton: 'Кіру',
+                    forgotPassword: 'Парольді ұмыттым',
+                    register: 'Тіркелу',
+                    guestMode: 'Қонақ ретінде кіру'
+                },
+                'ru': {
+                    title: 'Портал Университета KazNU',
+                    loginTitle: 'Вход в систему',
+                    loginSubtitle: 'Введите логин и пароль для входа',
+                    usernameLabel: 'Логин / Номер студента',
+                    passwordLabel: 'Пароль',
+                    userTypeLabel: 'Тип пользователя',
+                    loginButton: 'Войти',
+                    forgotPassword: 'Забыли пароль?',
+                    register: 'Регистрация',
+                    guestMode: 'Войти как гость'
+                },
+                'en': {
+                    title: 'KazNU University Portal',
+                    loginTitle: 'Login to System',
+                    loginSubtitle: 'Enter your username and password to login',
+                    usernameLabel: 'Login / Student ID',
+                    passwordLabel: 'Password',
+                    userTypeLabel: 'User Type',
+                    loginButton: 'Login',
+                    forgotPassword: 'Forgot Password?',
+                    register: 'Register',
+                    guestMode: 'Guest Mode'
+                }
+            };
+            
+            const t = translations[lang];
+            document.querySelector('.logo-text h1').textContent = t.title;
+            document.querySelector('.login-header h2').textContent = t.loginTitle;
+            document.querySelector('.login-header p').textContent = t.loginSubtitle;
+            document.querySelector('label[for="username"]').textContent = t.usernameLabel;
+            document.querySelector('label[for="password"]').textContent = t.passwordLabel;
+            document.querySelector('label[for="userType"]').textContent = t.userTypeLabel;
+            document.querySelector('.btn-login').textContent = t.loginButton;
+            
+            const links = document.querySelectorAll('.login-links a');
+            links[0].textContent = t.forgotPassword;
+            links[1].textContent = t.register;
+            links[2].textContent = t.guestMode;
+        }
+        
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const userType = document.getElementById('userType').value;
+            
+            if (username && password) {
+                // Show loading
+                document.querySelector('.btn-login').textContent = 'Кіру...';
+                document.querySelector('.btn-login').disabled = true;
+                
+                // Simulate API call
+                setTimeout(() => {
+                    document.getElementById('loginSection').style.display = 'none';
+                    document.getElementById('dashboardPreview').style.display = 'block';
+                    
+                    // Set user info
+                    document.getElementById('userName').textContent = username === '123456' ? 
+                        'Нұрлыбек Үрметов' : username;
+                    document.getElementById('userRole').textContent = 
+                        userType === 'student' ? '3-курс студенті' :
+                        userType === 'teacher' ? 'Оқытушы' : 'Әкімші';
+                    document.getElementById('userAvatar').textContent = 
+                        username.substring(0, 2).toUpperCase();
+                    
+                    alert('Кіру сәтті аяқталды!');
+                }, 1000);
+            } else {
+                alert('Логин және парольді енгізіңіз!');
+            }
+        });
+        
+        function logout() {
+            document.getElementById('dashboardPreview').style.display = 'none';
+            document.getElementById('loginSection').style.display = 'block';
+            document.querySelector('.btn-login').textContent = 'Кіру';
+            document.querySelector('.btn-login').disabled = false;
+            document.getElementById('loginForm').reset();
+        }
+        
+        function showForgotPassword() {
+            alert('Парольді қалпына келтіру сілтемесі email-ге жіберілді!');
+        }
+        
+        function showRegister() {
+            alert('Тіркелу беті жасалынуда...');
+        }
+        
+        function showGuestMode() {
+            document.getElementById('username').value = 'guest';
+            document.getElementById('password').value = 'guest123';
+            alert('Қонақ режиміне кірдіңіз. Шектеулі мүмкіндіктер қол жетімді.');
+        }
+        
+        // Initialize with Kazakh language
+        changeLanguage('kk');
+    </script>
+</body>
 </html>
