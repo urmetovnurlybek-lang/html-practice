@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Менің сайтым</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #f0f0f0;
+            padding: 20px;
+            text-align: center;
+        }
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Менің сайтыма қош келдіңіз!</h1>
+        <nav>
+            <a href="#about">Біз туралы</a>
+            <a href="#services">Қызметтер</a>
+            <a href="#contact">Байланыс</a>
+        </nav>
+    </header>
+    
+    <main>
+        <section id="about">
+            <h2>Біз туралы</h2>
+            <p>Бұл менің тұңғыш веб-сайтым.</p>
+        </section>
+        
+        <section id="services">
+            <h2>Қызметтер</h2>
+            <ul>
+                <li>Веб-дизайн</li>
+                <li>Мәтін редакциясы</li>
+                <li>Консультация</li>
+            </ul>
+        </section>
+        
+        <section id="contact">
+            <h2>Байланыс</h2>
+            <p>Email: example@email.com</p>
+            <p>Телефон: +7 777 123 4567</p>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Менің сайтым. Барлық құқықтар қорғалған.</p>
+    </footer>
+</body>
+</html>
